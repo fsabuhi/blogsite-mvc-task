@@ -2,7 +2,8 @@ import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head, usePage } from '@inertiajs/react';
-import {Link} from '@inertiajs/react';
+import { Link, useForm } from '@inertiajs/react';
+
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Posts',
@@ -13,6 +14,13 @@ const breadcrumbs: BreadcrumbItem[] = [
 export default function Posts() {
     const { props } = usePage<{ posts: { id: number; name: string; content: string; image?: string }[] }>();
     const posts = props.posts || [];
+    const { delete: destroy } = useForm();
+
+    const handleDelete = (id: number) => {
+        if (confirm('Are you sure you want to delete this post?')) {
+            destroy(route('posts.delete', id));
+        }
+    };
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
@@ -21,8 +29,8 @@ export default function Posts() {
                 <div className="border border-gray-200 rounded-lg p-4 w-full justify-between flex items-center">
                     <h1 className="text-2xl font-bold">Posts</h1>
                     <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-    <Link href={route('posts.create')}>Yeni artikl</Link>
-</button>
+                        <Link href={route('posts.create')}>Yeni artikl</Link>
+                    </button>
                 </div>
 
                 <div className="border border-gray-200 rounded-lg p-4 w-full h-full m-4">
@@ -39,6 +47,14 @@ export default function Posts() {
                                             className="mt-2 max-w-30 h-auto rounded"
                                         />
                                     )}
+                                    <div className="mt-2 flex space-x-2">
+                                        <button
+                                            onClick={() => handleDelete(post.id)}
+                                            className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded"
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
                                 </li>
                             ))}
                         </ul>
