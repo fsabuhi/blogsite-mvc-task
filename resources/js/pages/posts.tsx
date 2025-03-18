@@ -41,11 +41,7 @@ export default function Posts() {
                                     <h2 className="text-lg font-semibold">{post.name}</h2>
                                     <p className="text-gray-600">{post.content}</p>
                                     {post.image && (
-                                        <img
-                                            src={`/storage/${post.image}`}
-                                            alt={post.name}
-                                            className="mt-2 max-w-30 h-auto rounded"
-                                        />
+                             <img src="{{ \Storage::disk('s3')->url($post->image) }}" alt="{{ $post->name }}"/>
                                     )}
                                     <div className="mt-2 flex space-x-2">
                                         <button

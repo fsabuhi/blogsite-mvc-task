@@ -34,7 +34,7 @@ class PostController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('images', 'public'); 
+            $imagePath = $request->file('image')->store('images', 's3');
             $validated['image'] = $imagePath; 
         }
 
@@ -49,7 +49,7 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
 
         if ($post->image) {
-            \Storage::disk('public')->delete($post->image);
+            \Storage::disk('s3')->delete($post->image);
         }
 
         $post->delete();
