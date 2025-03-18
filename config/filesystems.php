@@ -49,18 +49,31 @@ return [
 
         's3' => [
             'driver' => 's3',
-            'key' => env('AWS_ACCESS_KEY_ID'),
-            'secret' => env('AWS_SECRET_ACCESS_KEY'),
-            'region' => env('AWS_DEFAULT_REGION'),
-            'bucket' => env('AWS_BUCKET'),
-            'url' => env('AWS_URL'),
-            'endpoint' => env('AWS_ENDPOINT'),
-            'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
+            'key' => '84cdf242bd06a3720e9cf306ae11acb7',
+            'secret' => '85b0c0a3f7a83e9d48048aceb1703b57f54ca09b1fa6ee41ea4e51d5d8b1b8be',
+            'region' => 'us-east-1',
+            'bucket' => 'fls-9e75cf98-b353-40cb-ae65-d20818f8eccc',
+            'url' => 'https://fls-9e75cf98-b353-40cb-ae65-d20818f8eccc.laravel.cloud',
+            'endpoint' => 'https://367be3a2035528943240074d0096e0cd.r2.cloudflarestorage.com',
+            'use_path_style_endpoint' => false,
             'throw' => false,
             'report' => false,
         ],
 
+        'r2' => [
+            'driver' => 's3',
+            'key' => '84cdf242bd06a3720e9cf306ae11acb7',
+            'secret' => '85b0c0a3f7a83e9d48048aceb1703b57f54ca09b1fa6ee41ea4e51d5d8b1b8be',
+            'region' => 'us-east-1',
+            'bucket' => 'fls-9e75cf98-b353-40cb-ae65-d20818f8eccc',
+            'url' => 'https://fls-9e75cf98-b353-40cb-ae65-d20818f8eccc.laravel.cloud',
+            'endpoint' => 'https://367be3a2035528943240074d0096e0cd.r2.cloudflarestorage.com',
+            'use_path_style_endpoint' => false,
+            'throw' => false,
+            'report' => false,
+        ],
     ],
+    
 
     /*
     |--------------------------------------------------------------------------
