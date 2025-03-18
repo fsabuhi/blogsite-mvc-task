@@ -15,7 +15,7 @@ class PostController extends Controller
             ->get()
             ->map(function ($post) {
                 if ($post->image) {
-                    $post->image_url = \Storage::disk('s3')->url($post->image);
+                    $post->image_url = \Storage::disk('r2')->url($post->image);
                 }
                 return $post;
             });
@@ -39,7 +39,7 @@ class PostController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('images', 's3');
+            $imagePath = $request->file('image')->store('images', 'r2');
             $validated['image'] = $imagePath; 
         }
 
@@ -54,7 +54,7 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
 
         if ($post->image) {
-            \Storage::disk('s3')->delete($post->image);
+            \Storage::disk('r2')->delete($post->image);
         }
 
         $post->delete();
