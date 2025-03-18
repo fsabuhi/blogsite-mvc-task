@@ -10,11 +10,16 @@ class PostController extends Controller
 {
     public function index()
     {
-        // Only fetch posts for the currently authenticated user
         $posts = Post::with('user')
             ->where('user_id', auth()->id())
-            ->get(); 
-            
+            ->get()
+            ->map(function ($post) {
+                if ($post->image) {
+                    $post->image_url = \Storage::disk('r2')->url($post->image);
+                }
+                return $post;
+            });
+    
         return Inertia::render('posts', [
             'posts' => $posts,
         ]);

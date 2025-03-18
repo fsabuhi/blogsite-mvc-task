@@ -36,23 +36,23 @@ export default function Posts() {
                 <div className="border border-gray-200 rounded-lg p-4 w-full h-full m-4">
                     {posts.length > 0 ? (
                         <ul className="space-y-4">
-                            {posts.map((post) => (
-                                <li key={post.id} className="border-b border-gray-300 pb-2">
-                                    <h2 className="text-lg font-semibold">{post.name}</h2>
-                                    <p className="text-gray-600">{post.content}</p>
-                                    {post.image && (
-                             <img src="{{ \Storage::disk('s3')->url($post->image) }}" alt="{{ $post->name }}"/>
-                                    )}
-                                    <div className="mt-2 flex space-x-2">
-                                        <button
-                                            onClick={() => handleDelete(post.id)}
-                                            className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded"
-                                        >
-                                            Delete
-                                        </button>
-                                    </div>
-                                </li>
-                            ))}
+                         {posts.map((post) => (
+    <li key={post.id} className="border-b border-gray-300 pb-2">
+        <h2 className="text-lg font-semibold">{post.name}</h2>
+        <p className="text-gray-600">{post.content}</p>
+        {post.image && (
+            <img src={post.image_url} alt={post.name} className="mt-2 max-w-full h-auto rounded" />
+        )}
+        <div className="mt-2 flex space-x-2">
+            <button
+                onClick={() => handleDelete(post.id)}
+                className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded"
+            >
+                Delete
+            </button>
+        </div>
+    </li>
+))}
                         </ul>
                     ) : (
                         <p className="text-gray-500">No posts available.</p>
